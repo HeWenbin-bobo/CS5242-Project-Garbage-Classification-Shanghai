@@ -1,1 +1,1 @@
-# CS5242-Project-Garbage-Classification-Shanghai-
+# CS5242-Project-Garbage-Classification-Shanghai
