@@ -17,7 +17,6 @@ description2 = Div(text="""<h3>Approach:</h3>
   <li>Fetch the images of garbage by designing our scrawler and modify their labels like <b>Recyclable - Glasses</b> to adapt our multi-class garbage classification model.</li>
   <li>Based on deep learning technology, design an image classification model to solve the garbage classification problem. <b>MLP</b> is set as the baseline, while <b>CNN</b> and <b>ANN</b> are considered to improve it.</li>
   <li>Based on the classification model, design a simple front-end layer for user interaction.</li>
-  <li>If you want to utilize our algorithm online, please refer to <a href="https://huggingface.co/spaces/wenbin1996/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai (Gradio)</a></li>
 </ul> 
 <p1>Total of <b>450 samples</b> analysed.</p1>""")
 
@@ -38,10 +37,11 @@ description_keyword = Div(text="""<h3>Keywords:</h3>""")
 
 description_current = Div(text="""<h3>Selected:</h3>""")
 
-notes = Div(text="""<h3>Contact:</h3><p1>School of Computing, National University Singapore (NUS). <br>
+notes = Div(text="""<h3>Contact:</h3><p1><b>Organization: </b>School of Computing, National University Singapore (NUS). <br>
                                 <b>Project Author: </b>Li Guoshen (XXXX), An Yuhong (XXXX), He Wenbin (e0767608@u.nus.edu)<br>
                                 <b>PI: </b>Dr. You Yang & Dr. Ai Xin<br>
-                                <b>GitHub: </b><a href="https://github.com/HeWenbin-bobo/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai</a>
+                                <b>GitHub: </b><a href="https://github.com/HeWenbin-bobo/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai</a><br>
+                                <b>Online Version: </b><a href="https://huggingface.co/spaces/wenbin1996/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai (Gradio)</a><br>
 </p1>
 <br>""")
 
