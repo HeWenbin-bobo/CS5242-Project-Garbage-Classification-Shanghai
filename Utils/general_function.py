@@ -197,29 +197,39 @@ def bar_plot(data, model_type, folder_name='./Figure/Summary'):
         test_accuracy_list.append(test_accuracy)
     bar_data = [train_loss_list, test_loss_list, train_accuracy_list, test_accuracy_list]
 
-    pos = list(range(len(data)))
     total_width, n = 0.8, 2
     width = total_width / 2
     fc_list = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
 
-    plt.figure(1, figsize=(8, 6))
+    plt.figure(1, figsize=(10, 6))
+    pos = list(range(len(data)))
+    for j in range(len(pos)):
+        pos[j] = pos[j] + n/4 * width
+    plt.xticks(pos, labels=name_list)
+    pos = list(range(len(data)))
+    plt.ylabel('Loss')
     for i in range(n):
-        plt.bar(pos, bar_data[i], width=width, label=label_list[i], tick_label = name_list, fc = fc_list[i])
+        plt.bar(pos, bar_data[i], width=width, label=label_list[i], fc = fc_list[i])
         for x, y in zip(pos, bar_data[i]):
-            plt.text(x, round(y, 2)+0.05, round(y, 2), ha='center',fontsize=10)
+            plt.text(x, round(y, 2)+0.01, round(y, 2), ha='center',fontsize=10)
         for j in range(len(pos)):
             pos[j] = pos[j] + width
     plt.legend()
-    plt.title("{model_type} model loss summary")
+    plt.title("f{model_type} model loss summary")
     plt.show()
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model loss summary.png'))
 
+    plt.figure(2, figsize=(10, 6))
     pos = list(range(len(data)))
-    plt.figure(2, figsize=(8, 6))
+    for j in range(len(pos)):
+        pos[j] = pos[j] + n/4 * width
+    plt.xticks(pos, labels=name_list)
+    pos = list(range(len(data)))
+    plt.ylabel('Loss')
     for i in range(2, n+2):
-        plt.bar(pos, bar_data[i], width=width, label=label_list[i], tick_label = name_list, fc = fc_list[i])
+        plt.bar(pos, bar_data[i], width=width, label=label_list[i], fc = fc_list[i])
         for x, y in zip(pos, bar_data[i]):
-            plt.text(x, round(y, 2)+0.002, round(y, 2), ha='center',fontsize=10)
+            plt.text(x, round(y, 3)+0.002, round(y, 3), ha='center',fontsize=10)
         for j in range(len(pos)):
             pos[j] = pos[j] + width
     plt.legend()
