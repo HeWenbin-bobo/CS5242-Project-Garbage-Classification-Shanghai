@@ -122,6 +122,8 @@ def train_and_test(train_loader, test_loader, model, model_name, loss_function, 
             print("Early stopping with best_acc: {:.4f}%, best_loss: {:.4f}".format(best_acc*100, best_loss))
             break
 
+    print("Best Accuracy for test : {:.4f}% at epoch {:03d}, best loss: {:.4f}\n".format(best_acc*100, best_epoch, best_loss))
+
     return model, history
 
 def history_save(history, model_name, folder_name='./Models'):
@@ -155,20 +157,75 @@ def result_figure_save(history, model_name, folder_name='./Figure/Models'):
     plt.ylim(0, 1)
     plt.savefig(os.path.join(folder_name, 'Garbage_classification_accuracy_curve.png'))
     plt.show()
-    
-def weight_plot(model, model_name, folder_name='./Figure/Models'):
-    model = copy.deepcopy(model).cpu()
-    folder_name = os.path.join(folder_name, model_name)
 
+def model_load(model_name, device, folder_name='./Models'):
+
+    model_save_path = os.path.join(folder_name, model_name)
+    if not os.path.exists(model_save_path):
+        raise "Haven't trained a model in {model_save_path}. Pleaese set model_retrain_flag as True to train a model first."
+    else:
+        model = torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'))
+        history = torch.load(os.path.join(model_save_path, 'garbage_classification_history.pt'))
+        history = np.array(history)
+
+    index_highest_accuracy_test = np.argmax(history[:, -1], axis=-1)
+    train_loss, test_loss, train_accuracy, test_accuracy = history[index_highest_accuracy_test, :]
+
+    print("Best Accuracy for test : {:.4f}%, best loss: {:.4f}\nAccuracy for train : {:.4f}%, loss: {:.4f}".format(test_accuracy*100, test_loss, train_accuracy*100, train_loss))
+
+    result_figure_save(history, model_name)
+
+    return model, history
+
+def bar_plot(data, model_type, folder_name='./Figure/Summary'):
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
         print(f"We create new directory {folder_name}")
 
-    for module in model.modules():
-        if isinstance(module, (nn.Linear, nn.Conv1d, nn.Conv2d)):
-            # print(module)
-            weight = module.weight.detach().numpy().reshape(-1)
-            break
+    name_list = list(data.keys())
+    label_list =  ['train_loss', 'test_loss', 'train_acc', 'test_acc']
+    train_loss_list = list()
+    test_loss_list = list()
+    train_accuracy_list = list()
+    test_accuracy_list = list()
+
+    for (train_loss, test_loss, train_accuracy, test_accuracy) in data.values():
+        train_loss_list.append(train_loss)
+        test_loss_list.append(test_loss)
+        train_accuracy_list.append(train_accuracy)
+        test_accuracy_list.append(test_accuracy)
+    bar_data = [train_loss_list, test_loss_list, train_accuracy_list, test_accuracy_list]
+
+    pos = list(range(len(data)))
+    total_width, n = 0.8, 4
+    width = total_width / n
+    fc_list = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
+
+    for i in range(n):
+        plt.bar(pos, bar_data[i], width=width, label=label_list[i], tick_label = name_list, fc = fc_list[i])
+        for j in range(len(pos)):
+            pos[j] = pos[j] + width
+
+    plt.legend()
+    plt.show()
+    plt.savefig(os.path.join(folder_name, '{model_type}.png'))
+    
+def weight_plot(model, model_name, folder_name='./Figure/Models'):
+    if type(model) is np.ndarray:
+        weight = model
+    else:
+        model = copy.deepcopy(model).cpu()
+        folder_name = os.path.join(folder_name, model_name)
+
+        if not os.path.exists(folder_name):
+            os.makedirs(folder_name)
+            print(f"We create new directory {folder_name}")
+
+        for module in model.modules():
+            if isinstance(module, (nn.Linear, nn.Conv1d, nn.Conv2d)):
+                # print(module)
+                weight = module.weight.detach().numpy().reshape(-1)
+                break
     
     
     hist_weights = np.ones_like(weight)/float(len(weight))
