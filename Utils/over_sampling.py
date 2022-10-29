@@ -45,7 +45,7 @@ print("Start loading all iamges...")
 X_oversampling, y_oversampling, labelencoder = images_df(train_dataset_save_path)
 # y_oversampling.groupby('label')['label'].count()
 
-def plot_samples(X, y, title=None, n_subplots=None, channels=4):
+def plot_samples(X, y, title=None, n_subplots=None, channels=4, folder_name='./Figure/Over Sampling'):
     if not n_subplots:
         n_subplots = [1, np.unique(y).shape[0]]
     imshape = int(np.sqrt(X.shape[-1]/channels))
@@ -64,6 +64,11 @@ def plot_samples(X, y, title=None, n_subplots=None, channels=4):
             axes.imshow(np.reshape(img.values, (imshape, imshape, channels)))
             axes.set_title(str(val))
             axes.axis("off")
+
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+        print(f"We create new directory {folder_name}")
+    plt.savefig(os.path.join(folder_name, title+'.jpg'))
 
 
 def get_disjoin(X1, y1, X2, y2):
@@ -104,7 +109,7 @@ def over_sampling_gsmote(X_train, y_train, strategies=["combined", "majority", "
         plot_samples(
             pd.DataFrame(X_gsmote_final),
             pd.Series(y_gsmote_final),
-            f"Generated Using G-SMOTE: {strategy}",
+            f"Generated Using G-SMOTE: {strategy}, {'explore' if len(strategies)==3 else 'final'}",
         )
     return X_gsmote, y_gsmote
 
