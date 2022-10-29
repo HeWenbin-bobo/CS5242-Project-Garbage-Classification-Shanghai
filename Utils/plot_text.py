@@ -7,7 +7,7 @@ header = Div(text="""<h1>CS5242 Project: Garbage Classification - Based on Rules
 toolbox_header = Div(text="""<h1>Toolbox:</h1>""")
 
 # project description
-description = Div(text="""<p1>An inevitable consequence of intense human activities is the rapid increase in the amount of waste that is produced, and it is the way these waste are handled, stored, collected, and disposed of, which can pose risks to the environment and to public health. At the heart of waste disposal is reasonable waste classification. ①Although different countries/cities may have proposed the details for garbage classification, it is not realistic for people to classify them without intelligent tools. As an increasingly detailed understanding of the different degrees of environmental, social, and economic risks associated with managing various types of ‘waste’ has developed, a variety of systems have been established to differentiate between materials. ②However, most available systems do not accept pictures as input, which makes it difficult for citizens to inquire about waste types.
+description = Div(text="""<p1>An inevitable consequence of intense human activities is the rapid increase in the amount of waste that is produced, and it is the way these waste are handled, stored, collected, and disposed of, which can pose risks to the environment and to public health. At the heart of waste disposal is reasonable waste classification. <b>①Although different countries/cities may have proposed the details for garbage classification, it is not realistic for people to classify them without intelligent tools.</b> As an increasingly detailed understanding of the different degrees of environmental, social, and economic risks associated with managing various types of ‘waste’ has developed, a variety of systems have been established to differentiate between materials. <b>②However, most available systems do not accept pictures as input, which makes it difficult for citizens to inquire about waste types.</b>
 Our algorithm model and solution therefore complements the gap between legislation and practice by developing an image-based waste sorting system, which assists users to understand the characteristics of waste so that it can be managed and monitored appropriately in a manner that protects human health and the environment. Based on the optimal model among MLP, CNN, and ANN, users can get quick and accurate judgments on the waste types, improving the garbage classification quality. Also, a simple front-end layer is included in our solution that allows users to interact easily.
 </p1>""")
 
@@ -25,13 +25,12 @@ cite = Div(text="""<p1><h3>Citation:</h3><a href="https://github.com/HeWenbin-bo
 <br><br>
 """)
 
-description_search = Div(text="""<h3>Filter by Text:</h3><p1>Search keyword to filter out the plot. It will search abstracts, 
-titles, journals, and authors. Please keep in mind that only 150 words of abstracts to reduce the size. Press enter when ready. 
+description_search = Div(text="""<h3>Filter by Text:</h3><p1>Search keyword to filter out the plot. It will search prediction labels. Press enter when ready.
 Clear and press enter to reset the plot.</p1>""")
 
 description_slider = Div(text="""<h3>Filter by the Clusters:</h3><p1>The slider below can be used to filter the target cluster. 
 Simply slide the slider to the desired cluster number to display the plots that belong to that cluster. 
-Slide back to 20 to show all.</p1>""")
+Slide back to 5 to show all.</p1>""")
 
 description_keyword = Div(text="""<h3>Keywords:</h3>""")
 
