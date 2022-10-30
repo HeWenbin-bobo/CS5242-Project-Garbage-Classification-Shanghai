@@ -164,8 +164,8 @@ def model_load(model_name, device, folder_name='./Models'):
     if not os.path.exists(model_save_path):
         raise "Haven't trained a model in {model_save_path}. Pleaese set model_retrain_flag as True to train a model first."
     else:
-        model = torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'))
-        history = torch.load(os.path.join(model_save_path, 'garbage_classification_history.pt'))
+        model = torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'), map_location=torch.device('cpu'))
+        history = torch.load(os.path.join(model_save_path, 'garbage_classification_history.pt'), map_location=torch.device('cpu'))
         history = np.array(history)
 
     index_highest_accuracy_test = np.argmax(history[:, -1], axis=-1)
