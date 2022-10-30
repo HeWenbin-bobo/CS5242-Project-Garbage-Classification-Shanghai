@@ -225,7 +225,7 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
         pos[j] = pos[j] + n/4 * width
     plt.xticks(pos, labels=name_list)
     pos = list(range(len(data)))
-    plt.ylabel('Loss')
+    plt.ylabel('Accuracy')
     for i in range(2, n+2):
         plt.bar(pos, bar_data[i], width=width, label=label_list[i], fc = fc_list[i])
         for x, y in zip(pos, bar_data[i]):
