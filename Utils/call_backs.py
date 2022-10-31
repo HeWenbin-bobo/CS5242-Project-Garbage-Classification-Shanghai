@@ -50,7 +50,6 @@ def input_callback(plot, source, out_text, keywords, classes_num):
                     out_text.text = 'Keywords: ' + keywords[Number(class_index)];
                     for (var i = 0; i < x.length; i++) {
                         if(indexes[i] == Number(class_index)) {
-                            console.log(predictions[i])
 							if(predictions_lowerCase[i].includes(key)) {
 								x[i] = x_backup[i];
 								y[i] = y_backup[i];
