@@ -13,11 +13,7 @@ def selected_code():
             current_selection.change.emit();
     """
     return code
-            # const truth = "<h4>Truth label: " + truths[-1].toString().replace(/<br>/g, ' ') + "</h4>";
-            # const prediction = "<p1><b>prediction:</b> " + predictions[-1].toString().replace(/<br>/g, ' ') + "</p1><br>";
-            # current_selection.text = truth + prediction;
-            # console.log(5 + 6);
-# handle the keywords and search
+
 def input_callback(plot, source, out_text, keywords, classes_num): 
 
     # slider call back for cluster selection
