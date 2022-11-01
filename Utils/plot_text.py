@@ -28,8 +28,8 @@ cite = Div(text="""<p1><h3>Citation:</h3><a href="https://github.com/HeWenbin-bo
 description_search = Div(text="""<h3>Filter by Text:</h3><p1>Search keyword to filter out the plot. It will search prediction labels. Press enter when ready.
 Clear and press enter to reset the plot.</p1>""")
 
-description_slider = Div(text="""<h3>Filter by the Clusters:</h3><p1>The slider below can be used to filter the target cluster. 
-Simply slide the slider to the desired cluster number to display the plots that belong to that cluster. 
+description_slider = Div(text="""<h3>Filter by the actual labels:</h3><p1>The slider below can be used to filter the target label. 
+Simply slide the slider to the desired cluster number to display the plots that belong to that label. 
 Slide back to 5 to show all.</p1>""")
 
 description_keyword = Div(text="""<h3>Keywords:</h3>""")
@@ -40,7 +40,8 @@ notes = Div(text="""<h3>Contact:</h3><p1><b>Organization: </b>School of Computin
                                 <b>Project Author: </b>Li Guoshen (XXXX), An Yuhong (XXXX), He Wenbin (e0767608@u.nus.edu)<br>
                                 <b>PI: </b>Dr. You Yang & Dr. Ai Xin<br>
                                 <b>GitHub: </b><a href="https://github.com/HeWenbin-bobo/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai</a><br>
-                                <b>Online Version: </b><a href="https://huggingface.co/spaces/wenbin1996/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai (Gradio)</a><br>
+                                <b>Online Prediction APP: </b><a href="https://huggingface.co/spaces/wenbin1996/CS5242-Project-Garbage-Classification-Shanghai">CS5242-Project-Garbage-Classification-Shanghai (Gradio)</a><br>
+                                <b>Bokeh Visualization: </b><a href="https://hewenbin-bobo.github.io/garbage_classification_plot_interactive.html">CS5242-Project-Garbage-Classification-Shanghai (Iterative Plot)</a><br>
 </p1>
 <br>""")
 
