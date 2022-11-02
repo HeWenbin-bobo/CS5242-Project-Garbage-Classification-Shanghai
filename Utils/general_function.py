@@ -216,8 +216,8 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
             pos[j] = pos[j] + width
     plt.legend()
     plt.title(f"{model_type} model loss summary")
-    # plt.show()
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model loss summary.png'))
+    plt.show()
 
     plt.figure(2, figsize=figsize)
     pos = list(range(len(data)))
@@ -234,8 +234,8 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
             pos[j] = pos[j] + width
     plt.legend()
     plt.title(f"{model_type} model accuracy summary")
-    # plt.show()
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model accuracy summary.png'))
+    plt.show()
     
 def weight_plot(model, model_name, folder_name='./Figure/Models'):
     folder_name = os.path.join(folder_name, model_name)
