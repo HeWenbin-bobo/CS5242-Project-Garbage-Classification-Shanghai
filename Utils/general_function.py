@@ -216,7 +216,7 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
             pos[j] = pos[j] + width
     plt.legend()
     plt.title(f"{model_type} model loss summary")
-    plt.show()
+    # plt.show()
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model loss summary.png'))
 
     plt.figure(2, figsize=figsize)
