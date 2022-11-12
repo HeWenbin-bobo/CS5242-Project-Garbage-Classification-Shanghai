@@ -18,7 +18,7 @@ def weight_initialization(model):
             module.weight.data.fill_(1)
             module.bias.data.zero_()
 
-def train_and_test(train_loader, test_loader, model, model_name, loss_function, optimizer, device, epochs=25, folder_name='./Models'):
+def train_and_test(train_loader, test_loader, model, model_name, loss_function, optimizer, device, epochs=25, save_state_dict=False, folder_name='./Models'):
     history = []
     best_acc = 0.0
     best_loss = float("inf")
@@ -99,7 +99,10 @@ def train_and_test(train_loader, test_loader, model, model_name, loss_function, 
             best_acc = avg_test_acc
             best_epoch = epoch + 1
             es = 0
-            torch.save(model, os.path.join(model_save_path, 'garbage_classification_model.pt'))
+            if not save_state_dict:
+                torch.save(model, os.path.join(model_save_path, 'garbage_classification_model.pt'))
+            else:
+                torch.save(model.state_dict(), os.path.join(model_save_path, 'garbage_classification_model.pt'))
         else:
             if best_loss > avg_test_loss:
                 best_loss = avg_test_loss
@@ -158,13 +161,17 @@ def result_figure_save(history, model_name, folder_name='./Figure/Models'):
     plt.savefig(os.path.join(folder_name, 'Garbage_classification_accuracy_curve.png'))
     plt.show()
 
-def model_load(model_name, device, folder_name='./Models'):
+def model_load(model_name, device, model=None, load_state_dict=False, folder_name='./Models'):
 
     model_save_path = os.path.join(folder_name, model_name)
     if not os.path.exists(model_save_path):
         raise "Haven't trained a model in {model_save_path}. Pleaese set model_retrain_flag as True to train a model first."
     else:
-        model = torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'), map_location=torch.device('cpu'))
+        if not load_state_dict:
+            model = torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'), map_location=torch.device('cpu'))
+        else:
+            model.load_state_dict(torch.load(os.path.join(model_save_path, 'garbage_classification_model.pt'), map_location=torch.device('cpu')))
+        model.eval()
         history = torch.load(os.path.join(model_save_path, 'garbage_classification_history.pt'), map_location=torch.device('cpu'))
         history = np.array(history)
 
@@ -177,7 +184,7 @@ def model_load(model_name, device, folder_name='./Models'):
 
     return model, history
 
-def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
+def bar_plot(data, model_type, offset=0.01, figsize=(10, 6), folder_name='./Figure/Summary'):
     figure_save_path = os.path.join(folder_name, model_type)
     if not os.path.exists(figure_save_path):
         os.makedirs(figure_save_path)
@@ -211,10 +218,10 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
     for i in range(n):
         plt.bar(pos, bar_data[i], width=width, label=label_list[i], fc = fc_list[i])
         for x, y in zip(pos, bar_data[i]):
-            plt.text(x, round(y, 2)+0.01, round(y, 2), ha='center',fontsize=10)
+            plt.text(x, round(y, 2)+offset, round(y, 2), ha='center', fontsize=10)
         for j in range(len(pos)):
             pos[j] = pos[j] + width
-    plt.legend()
+    plt.legend(loc=(1.02,0.9))
     plt.title(f"{model_type} model loss summary")
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model loss summary.png'))
     plt.show()
@@ -229,10 +236,10 @@ def bar_plot(data, model_type, figsize=(10, 6), folder_name='./Figure/Summary'):
     for i in range(2, n+2):
         plt.bar(pos, bar_data[i], width=width, label=label_list[i], fc = fc_list[i])
         for x, y in zip(pos, bar_data[i]):
-            plt.text(x, round(y, 3)+0.002, round(y, 3), ha='center',fontsize=10)
+            plt.text(x, round(y, 3)+offset/5.0, round(y, 3), ha='center', fontsize=10)
         for j in range(len(pos)):
             pos[j] = pos[j] + width
-    plt.legend()
+    plt.legend(loc=(1.02,0.9))
     plt.title(f"{model_type} model accuracy summary")
     plt.savefig(os.path.join(figure_save_path, f'{model_type} model accuracy summary.png'))
     plt.show()

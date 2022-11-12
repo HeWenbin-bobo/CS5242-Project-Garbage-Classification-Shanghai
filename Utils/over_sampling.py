@@ -109,7 +109,7 @@ def over_sampling_gsmote(X_train, y_train, strategies=["combined", "majority", "
         plot_samples(
             pd.DataFrame(X_gsmote_final),
             pd.Series(y_gsmote_final),
-            f"Generated Using G-SMOTE: {strategy}, {'explore' if len(strategies)==3 else 'final'}",
+            f"Generated Using G-SMOTE {strategy}, {'explore' if len(strategies)==3 else 'final'}",
         )
     return X_gsmote, y_gsmote
 
