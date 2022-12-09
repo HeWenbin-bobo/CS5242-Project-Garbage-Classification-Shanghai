@@ -11,3 +11,6 @@ For Neural Networks and Deep Learning (CS 5242) AY 2022-2023 Sem 1.
 
 ## Project initialization
 * Please run `model_code.ipynb` on colab. Program will automatically download all necessary files from github repository. (Or you can directly get all files from google drive link)
+
+## MEMO
+Since the well-trained VIT model is too large, we have to remove it in our Github repository (otherwise, we need to pay the Github LFS service). Instead, we upload the rar files of this model. Due to this update, some code may need to update in notebook (even if you download all files through Google Drive, still need to update some code to avoid re-download these files)
